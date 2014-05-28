@@ -10,7 +10,19 @@ To run the example project; clone the repo, and run `pod install` from the Examp
 
 ![Capture](/capture.gif?raw=true "Capture in action")
 
-## Requirements
+Import **GSIndeterminateProgressView.h**
+
+```objective-c
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+
+    GSIndeterminateProgressView *progressView = [[GSIndeterminateProgressView alloc] initWithFrame:CGRectMake(0, navigationBar.frame.size.height - 2,
+                                                                                                              navigationBar.frame.size.width, 2)];
+    progressView.progressTintColor = navigationBar.barTintColor;
+    progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [navigationBar addSubview:progressView];
+
+    [progressView startAnimating];
+```
 
 ## Installation
 
