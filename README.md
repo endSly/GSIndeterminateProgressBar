@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/cocoapods/l/GSIndeterminateProgressBar.svg?style=flat)](http://cocoadocs.org/docsets/GSIndeterminateProgressBar)
 [![Platform](https://img.shields.io/cocoapods/p/GSIndeterminateProgressBar.svg?style=flat)](http://cocoadocs.org/docsets/GSIndeterminateProgressBar)
 
+**GSIndeterminateProgressView** is a subclass of **UIView** that looks like
+**UIProgressView** but acts like **UIActivityIndicatorView**.
+
 ## Usage
 
 To run the example project; clone the repo, and run `pod install` from the Example directory first.
