@@ -1,0 +1,14 @@
+PODS:
+  - GSIndeterminateProgressBar (0.1.0)
+
+DEPENDENCIES:
+  - GSIndeterminateProgressBar (from `../`)
+
+EXTERNAL SOURCES:
+  GSIndeterminateProgressBar:
+    :path: ../
+
+SPEC CHECKSUMS:
+  GSIndeterminateProgressBar: 6395f1b36a4525ae4f529b87ba68a3da5cafb211
+
+COCOAPODS: 0.33.1
