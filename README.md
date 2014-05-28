@@ -8,6 +8,8 @@
 
 To run the example project; clone the repo, and run `pod install` from the Example directory first.
 
+![Capture](/capture.gif?raw=true "Capture in action")
+
 ## Requirements
 
 ## Installation
