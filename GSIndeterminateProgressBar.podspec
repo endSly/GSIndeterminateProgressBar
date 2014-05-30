@@ -9,16 +9,17 @@ Pod::Spec.new do |s|
   s.version          = "0.1.0"
   s.summary          = "GSIndeterminateProgressView is a subclass of UIView that looks like UIProgressView but acts like UIActivityIndicatorView."
   s.description      = <<-DESC
-                       GSIndeterminateProgressView is a subclass of UIView that looks like UIProgressView but acts like UIActivityIndicatorView.
+                       GSIndeterminateProgressView look similar to UIProgressView using animation to show indeterminate progress.
+                       Class interface seems to UIActivityIndicatorView.
                        DESC
   s.homepage         = "https://github.com/endSly/GSIndeterminateProgressBar"
-  s.screenshots      = "https://github.com/endSly/GSIndeterminateProgressBar/raw/master/capture.gi"
+  s.screenshots      = "https://github.com/endSly/GSIndeterminateProgressBar/raw/master/capture.gif"
   s.license          = 'MIT'
   s.author           = { "Endika Gutiérrez" => "me@endika.net" }
   s.source           = { :git => "https://github.com/endSly/GSIndeterminateProgressBar.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/endSly'
 
-  # s.platform     = :ios, '5.0'
+  s.platform     = :ios, '5.0'
   # s.ios.deployment_target = '5.0'
   # s.osx.deployment_target = '10.7'
   s.requires_arc = true

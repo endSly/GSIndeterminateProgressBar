@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  GSIndeterminateProgressBar: 6395f1b36a4525ae4f529b87ba68a3da5cafb211
+  GSIndeterminateProgressBar: 1915a87169003a538a5e5b93a48421cfe661a52a
 
 COCOAPODS: 0.33.1
