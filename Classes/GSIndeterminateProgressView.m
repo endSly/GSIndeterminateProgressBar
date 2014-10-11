@@ -7,6 +7,7 @@
 //
 
 #import "GSIndeterminateProgressView.h"
+#import "CALayer+MBAnimationPersistence.h"
 
 const CGFloat CHUNK_WIDTH = 36.0f;
 
@@ -38,9 +39,9 @@ const CGFloat CHUNK_WIDTH = 36.0f;
 - (void)setProgressTintColor:(UIColor *)progressTintColor
 {
     _progressTintColor = progressTintColor;
-    for (UIView *v in self.progressChunks) {
+    [self.progressChunks enumerateObjectsUsingBlock:^(UIView* v, NSUInteger idx, BOOL *stop) {
         v.backgroundColor = progressTintColor;
-    }
+    }];
 }
 
 - (void)startAnimating
@@ -54,14 +55,13 @@ const CGFloat CHUNK_WIDTH = 36.0f;
                             [[UIView alloc] initWithFrame:CGRectMake(-CHUNK_WIDTH, 0, CHUNK_WIDTH, self.frame.size.height)],
                             [[UIView alloc] initWithFrame:CGRectMake(-CHUNK_WIDTH, 0, CHUNK_WIDTH, self.frame.size.height)]];
 
-    NSTimeInterval delay = 0;
-    for (UIView *v in self.progressChunks) {
-        v.backgroundColor = self.progressTintColor;
-
-        [self addSubview:v];
-
-        [self animateProgressChunk:v delay:(delay += 0.25)];
-    }
+    __block float delay = 0.0f;
+    __weak GSIndeterminateProgressView* safeSelf = self;
+    [self.progressChunks enumerateObjectsUsingBlock:^(UIView* v, NSUInteger idx, BOOL *stop) {
+        v.backgroundColor = safeSelf.progressTintColor;
+        [safeSelf addSubview:v];
+        [safeSelf animateProgressChunk:v delay:(delay += 0.25f)];
+    }];
 }
 
 - (void)stopAnimating
@@ -71,26 +71,31 @@ const CGFloat CHUNK_WIDTH = 36.0f;
 
     self.hidden = self.hidesWhenStopped;
 
-    for (UIView *v in self.progressChunks) {
+    [self.progressChunks enumerateObjectsUsingBlock:^(UIView* v, NSUInteger idx, BOOL *stop) {
         [v removeFromSuperview];
-    }
+    }];
 
     self.progressChunks = nil;
 }
 
 - (void)animateProgressChunk:(UIView *)chunk delay:(NSTimeInterval)delay
 {
-    [UIView animateWithDuration:0.75 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect chuckFrame = chunk.frame;
-        chuckFrame.origin.x = self.frame.size.width;
-        chunk.frame = chuckFrame;
-    } completion:^(BOOL finished) {
-        CGRect chuckFrame = chunk.frame;
-        chuckFrame.origin.x = -CHUNK_WIDTH;
-        chunk.frame = chuckFrame;
-        if (finished)
-            [self animateProgressChunk:chunk delay:0.4];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CGRect chuckFrame2 = chunk.frame;
+        chuckFrame2.origin.x = -CHUNK_WIDTH;
+        chunk.frame = chuckFrame2;
+        [UIView animateWithDuration:0.85f delay:delay options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionRepeat animations:^{
+            CGRect chuckFrame3 = chunk.frame;
+            chuckFrame3.origin.x = self.frame.size.width;
+            chunk.frame = chuckFrame3;
+        } completion:^(BOOL finished) {
+            //if (finished)
+        }];
+        //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((.75f+delay) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //        [self animateProgressChunk:chunk delay:0.4f];
+        //    });
+        [chunk.layer MB_setCurrentAnimationsPersistent];
+    });
 }
 
 @end
