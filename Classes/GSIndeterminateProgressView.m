@@ -72,7 +72,14 @@ const CGFloat CHUNK_WIDTH = 36.0f;
     self.hidden = self.hidesWhenStopped;
 
     [self.progressChunks enumerateObjectsUsingBlock:^(UIView* v, NSUInteger idx, BOOL *stop) {
-        [v removeFromSuperview];
+        [UIView animateWithDuration:(.3f*idx)
+                              delay:0.0f
+                            options:0
+                         animations:^{
+                             v.alpha = 0.0f;
+                         } completion:^(BOOL finished) {
+                             [v removeFromSuperview];
+                         }];
     }];
 
     self.progressChunks = nil;
