@@ -52,7 +52,6 @@ const CGFloat CHUNK_WIDTH = 36.0f;
     self.hidden = NO;
 
     self.progressChunks = @[[[UIView alloc] initWithFrame:CGRectMake(-CHUNK_WIDTH, 0, CHUNK_WIDTH, self.frame.size.height)],
-                            [[UIView alloc] initWithFrame:CGRectMake(-CHUNK_WIDTH, 0, CHUNK_WIDTH, self.frame.size.height)],
                             [[UIView alloc] initWithFrame:CGRectMake(-CHUNK_WIDTH, 0, CHUNK_WIDTH, self.frame.size.height)]];
 
     __block float delay = 0.0f;
@@ -60,7 +59,7 @@ const CGFloat CHUNK_WIDTH = 36.0f;
     [self.progressChunks enumerateObjectsUsingBlock:^(UIView* v, NSUInteger idx, BOOL *stop) {
         v.backgroundColor = safeSelf.progressTintColor;
         [safeSelf addSubview:v];
-        [safeSelf animateProgressChunk:v delay:(delay += 0.25f)];
+        [safeSelf animateProgressChunk:v delay:(delay += 0.35f)];
     }];
 }
 
@@ -91,7 +90,7 @@ const CGFloat CHUNK_WIDTH = 36.0f;
         CGRect chuckFrame2 = chunk.frame;
         chuckFrame2.origin.x = -CHUNK_WIDTH;
         chunk.frame = chuckFrame2;
-        [UIView animateWithDuration:0.85f delay:delay options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionRepeat animations:^{
+        [UIView animateWithDuration:0.95f delay:delay options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionRepeat animations:^{
             CGRect chuckFrame3 = chunk.frame;
             chuckFrame3.origin.x = self.frame.size.width;
             chunk.frame = chuckFrame3;
